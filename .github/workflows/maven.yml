@@ -6,8 +6,6 @@ name: Java CI with Maven
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -24,3 +22,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+  artifact:
+    name: Publish - GitHub Packages
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: path/to/artifact/ # or path/to/artifact 
